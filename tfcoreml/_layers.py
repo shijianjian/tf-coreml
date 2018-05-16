@@ -955,6 +955,10 @@ def argmax(op, context):
     assert False, 'ArgMax: Axis tensor not found in the list of Consts'
   if len(input_shape) == 4 and axis_tf == 3:
     axis = 'C'
+  elif (len(input_shape) == 4 or len(input_shape) == 3) and axis_tf == 2:
+    axis = 'W'
+  elif (len(input_shape) == 4 or len(input_shape) == 3 or len(input_shape) == 2) and axis_tf == 1:
+    axis = 'H'
   else:
     assert False,('ArgMax: Axis translation case not handled currently. '
                   'Input shape = {}, output shape = {}, axis = {}'.
