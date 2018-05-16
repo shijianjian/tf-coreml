@@ -412,7 +412,11 @@ def _add_mean(op, context):
         'Axis value %s not supported. '
         'Reduction supported along C, H, W, HW, CHW dimensions only.' % axis)
   else:
-    if len(input_shape) == 4 and (
+    if len(input_shape) == 2 and (
+        np.array_equal(axis_ind, np.array_equal([0]))
+    ):
+      axis = 'S'
+    elif len(input_shape) == 4 and (
         np.array_equal(axis_ind, np.array([0, 1, 2])) or
         np.array_equal(axis_ind, np.array([1, 2]))):
       axis = 'HW'
